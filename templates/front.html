@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for post in posts %}
+    <hr>
+    <div class="post">
+        <div class="post-subject">{{post.subject}}</div>
+        <div class="post-content">{{post.content}}</div><br>
+        {{post.key().id()}}
+    </div>
+    {% endfor %}
+{% endblock %}
