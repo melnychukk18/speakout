@@ -11,10 +11,47 @@ $white: #FFF;
 $grey: #585c65;
 $mediumgrey: #9b9b9b;
 $lightgrey: #eee;
-$blue: #3466a1;
+$blue : #3466a1;
 
 $padding: 10px;
 $margin: 10px;
+
+@mixin post-title(){
+    font-family: $main-font;
+    font-size: 26px;
+    color: $gray;
+    &:hover{
+        color: $gray;
+        text-decoration: underline;
+    }
+}
+
+@mixin post-text(){
+    font-family: $main-font;
+    font-size: $font-size;
+    color: $gray;
+}
+
+@mixin post-bottom-text(){
+    font-family: $main-font;
+    font-size: 12px;
+    font-weight: 700;
+    color: $mediumgrey;
+}
+
+
+@mixin sub-title(){
+    font-size: 13px;
+    font-weight: 700;
+    color: $gray;
+
+}
+
+@mixin sub-text(){
+    font-size: 13px;
+    font-weight: 400;
+    color: $gray;
+}
 
 /*
     Cancel bootstrap variables
@@ -178,6 +215,7 @@ body {
     background: $white;
     position: relative;
     padding-bottom: 50px;
+    
     footer {
         color: $grey;
         position: absolute;
@@ -233,20 +271,19 @@ body {
         }
     }
 }
-
 #user-logo {
     font-family: $fancy-font;
     font-size: 20px;
     color: $grey;
     float: left;
-    margin: 30px 0;
+    margin: 20px 0;
 }
 
 #header-nav {
     font-family: $sub-font;
     color: $grey;
     float: right;
-    margin-top: 21px;
+    margin: 18px 0 0 0;
     li {
         list-style: none;
         display: inline-block;
@@ -265,8 +302,7 @@ body {
     .post-title {
         margin: 20px 0 10px 0;
         a {
-            font-size: 25px;
-            color: $grey;
+            @include post-title();
         }
     }
     .post-footer {
@@ -278,8 +314,7 @@ body {
         .post-footer-element {
             display: inline-block;
             margin-right: 15px;
-            font-size: 13px;
-            font-weight: 700;
+            @include post-bottom-text();
             button {
                 border: none;
                 background: none;
@@ -355,8 +390,7 @@ body {
             margin-right: 15px;
         }
         .user-status{
-            font-weight: 100;
-            font-size: 14px;
+            @include sub-text();
             border-left: 4px solid #e8e8e8;
             padding-left: 10px;
             margin-top: 15px;
@@ -392,14 +426,15 @@ body {
 
     .user-about{
         .user-about-title{
-            font-size: 14px;
-            font-weight: 700;
-            margin: 20px 5px;
+            @include sub-title();
         }
         .user-about-text{
-            font-size: 13px;
+            @include sub-text();
             border-left: 4px solid #e8e8e8;
             padding-left: 10px;
+            li{
+                list-style: none;
+            }
         }
     }
 }

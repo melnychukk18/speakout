@@ -1,12 +1,6 @@
 {% extends "base_mypage.html" %}
 {% block content %}
-<form method="post">
-  <input type="hidden" name="username" value="{{username}}">
-  <input type="hidden" name="action" value="{{action}}">
-  <button type="submit">
-    {{btn_name}}  
-  </button>
-  </form>
+<h2>Posts by {{username.username}}</h2>
       <div class="posts">
   {% if posts %}
   {% for p in posts %}
@@ -21,4 +15,59 @@
 <script>
 	classToggle('{{forJS}}');
 </script>
+
 {% endblock %}
+
+
+
+        {% block sidebar %}
+        <div class="user-title"><img src="/img/user2.png" alt="">{{username.username}}
+        
+    <form method="post">
+      <input type="hidden" name="username" value="{{username.username}}">
+      <input type="hidden" name="action" value="{{action}}">
+      <button type="submit">
+        {{btn_name}}  
+      </button>
+    </form>
+        <div class="user-status">
+        {% if username.status %}
+        {{ username.status }}
+        {% else %}
+        Empty
+        {% endif %}
+        </div></div>
+        <div class="user-blocks">
+        
+          <div class="user-block">
+            <span class="user-block-number">{{username.get_followers_number(username.username)}}</span><br>
+            <span class="user-block-name">followers</span>
+          </div><div class="user-block">
+            <span class="user-block-number">{{username.get_followings_number(username.username)}}</span><br>
+            <span class="user-block-name">following</span>
+          </div><div class="user-block">
+            <span class="user-block-number">{{username.get_posts_number(username.username)}}</span><br>
+            <span class="user-block-name">posts</span>
+          </div><div class="user-block">
+            <span class="user-block-number">{{username.get_liked_number(username.username)}}</span><br>
+            <span class="user-block-name">liked</span>
+          </div>
+        </div>
+
+        
+        <div class="user-about">
+          <div class="user-about-title">Abuot me:</div>
+          <div class="user-about-text">
+            {% if username.about %}
+            {{username.about}}
+            {% else %}
+            Empty
+            {% endif %}
+          </div>
+          <div class="user-about-title">Statistics:</div>
+          <div class="user-about-text">
+            Likes: {{username.get_likes_number(username.username)}} <br>
+            Comments: {{username.get_comments_number(username.username)}} <br>
+            Views: {{username.get_views_number(username.username)}}
+          </div>
+        </div>{% endblock %}

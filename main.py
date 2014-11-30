@@ -127,7 +127,7 @@ class User(db.Model):
 
     @classmethod
     def get_posts_number(cls, username):
-        return Post.all().filter('username =', username).count()
+        return Post.all().filter('user =', username).count()
 
     @classmethod
     def get_likes_number(cls, username):
@@ -138,6 +138,18 @@ class User(db.Model):
     def get_comments_number(cls, username):
         comments = Post.by_username(username)
         return sum([a.comments for a in comments])
+
+    @classmethod
+    def get_followers_number(cls, username):
+        return len(Followers.get_followers(username))
+
+    @classmethod
+    def get_followings_number(cls, username):
+        return len(Followers.get_followings(username))
+
+    @classmethod
+    def get_liked_number(cls, username):
+        return Likes.all().filter('username =', username).count()
 
     @classmethod
     def get_views_number(cls, username):
@@ -182,7 +194,7 @@ class Post(db.Model):
 
     @classmethod
     def by_username(cls, username):
-        posts = Post.all().filter('user= ', username)
+        posts = Post.all().filter('user =', username)
         return posts
 
     @classmethod
@@ -441,7 +453,7 @@ class MyPosts(BlogHandler):
     def get(self):
         if self.user:
             posts = Post.all().filter('user =', self.user.username)
-            self.render('front.html', posts=posts, forJS="my-posts")
+            self.render('mypage.html', posts=posts, forJS="my-posts")
         else:
             self.redirect('/login')
 
@@ -459,7 +471,7 @@ class Noize(BlogHandler):
     def get(self):
         if self.user:
             posts = Post.all().order('-created')
-            self.render('front.html', posts=posts, forJS="noize")
+            self.render('mypage.html', posts=posts, forJS="noize")
         else:
             self.redirect('/login')
 
@@ -480,7 +492,7 @@ class TopPosts(BlogHandler):
             posts = sorted(
                 posts, key=lambda post: (post.likes * 15) + post.views)
             posts = [posts[i] for i in xrange(len(posts) - 1, -1, -1)]
-            self.render('front.html', posts=posts, forJS="top-posts")
+            self.render('mypage.html', posts=posts, forJS="top-posts")
         else:
             self.redirect('/login')
 
@@ -501,7 +513,7 @@ class LikedPosts(BlogHandler):
                 'username =', self.user.username).order('-time_liked')
             l = [long(i.post_id) for i in likes]
             posts = [Post.get_by_id(i) for i in l]
-            self.render('front.html', posts=posts, forJS="liked")
+            self.render('mypage.html', posts=posts, forJS="liked")
         else:
             self.redirect('/login')
 
@@ -582,13 +594,14 @@ class UserPage(BlogHandler):
 
     def get(self, username):
         if self.user:
-            if User.by_name(username):
+            if User.by_name(username) and username != self.user.username:
                 posts = Post.all().filter("user =", username)
                 btn = ""
                 if Followers.if_following(self.user.username, username):
                     btn = "unfollow"
                 else:
                     btn = "follow"
+                username = User.all().filter('username =', username).get()
                 self.render('front2.html', posts=posts, username=username,
                             btn_name=btn)
             else:
@@ -618,7 +631,31 @@ class NewsPage(BlogHandler):
     def get(self):
         followings = Followers.get_followings(self.user.username)
         posts = Post.get_by_followings(followings)
-        self.render('front.html', posts=posts)
+        self.render('mypage.html', posts=posts, forJS="news")
+
+    def post(self):
+        p = self.request.get('like')
+        my_post = Post.get_by_id(int(p))
+        self.like_btn(p, my_post)
+
+        time.sleep(0.1)
+        self.redirect('/top')
+
+
+class SettingsPage(BlogHandler):
+
+    def get(self):
+        self.render('settings.html', status=self.user.status,
+                    about=self.user.about)
+
+    def post(self):
+        about = self.request.get('about')
+        status = self.request.get('status')
+        self.user.about = about
+        self.user.status = status
+        self.user.put()
+        time.sleep(0.1)
+        self.redirect('/settings')
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
@@ -632,5 +669,6 @@ app = webapp2.WSGIApplication([
     ('/top', TopPosts),
     ('/liked', LikedPosts),
     ('/userpage/(.*)', UserPage),
-    ('/news', NewsPage)
+    ('/news', NewsPage),
+    ('/settings', SettingsPage)
 ], debug=True)

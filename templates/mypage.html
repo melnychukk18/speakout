@@ -1,0 +1,73 @@
+{% extends "base_mypage.html" %}
+{% block content %}
+      
+
+          
+          <nav class="frontpage-nav">
+            <ul>
+              <li id="news" class="active fp-nav-element"><a href="/news">News</a></li>
+              <li id="top-posts" class="fp-nav-element"><a href="/top">Top</a>
+            </li>
+            <li id="noize" class="fp-nav-element"><a href="/noize">Noize</a>              </li>
+            <li id="liked" class="fp-nav-element"><a href="/liked">Liked</a></li>
+            <li id="newpost" class="fp-nav-element"><a href="/newpost"><img src="/img/pen.png" width="15px" alt="">New post</a></li>
+          </ul>
+        </nav>
+
+        
+
+      <div class="posts">
+  {% if posts %}
+  {% for p in posts %}
+    {{p.render(preview = True,user=user) | safe}}
+  {% endfor %}
+  {% else %}
+  <p style="font-size: 20px; padding: 20px 20px;">There is no posts :(</p>
+  {% endif %}
+      </div>
+
+
+
+{% endblock %}
+
+        {% block sidebar %}
+        <div class="user-title"><img src="/img/user2.png" alt="">{{user.username}}
+        {% block followform %}
+        {% endblock %}
+        <div class="user-status">
+          {% if user.status %}
+          {{user.status}}
+          {% else %}
+          <a href="/settings">add status</a>
+          {% endif %}</div></div>
+        <div class="user-blocks">
+        
+          <div class="user-block">
+            <span class="user-block-number">{{user.get_followers_number(user.username)}}</span><br>
+            <span class="user-block-name">followers</span>
+          </div><div class="user-block">
+            <span class="user-block-number">{{user.get_followings_number(user.username)}}</span><br>
+            <span class="user-block-name">following</span>
+          </div><div class="user-block">
+            <span class="user-block-number">{{user.get_posts_number(user.username)}}</span><br>
+            <span class="user-block-name">posts</span>
+          </div><div class="user-block">
+            <span class="user-block-number">{{user.get_liked_number(user.username)}}</span><br>
+            <span class="user-block-name">liked</span>
+          </div>
+        </div>
+
+        
+        <div class="user-about">
+          <div class="user-about-title">Abuot me:</div>
+          <div class="user-about-text">
+          {% if user.about %}
+          {{user.about}}
+          {% else %}
+          <a href="/settings">add some information</a>
+          {% endif %}
+          </div>
+        </div>{% endblock %}
+{% block scripts %}
+  classToggle('{{forJS}}');
+{% endblock %}
