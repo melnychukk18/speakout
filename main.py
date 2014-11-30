@@ -602,7 +602,7 @@ class UserPage(BlogHandler):
                 else:
                     btn = "follow"
                 username = User.all().filter('username =', username).get()
-                self.render('front2.html', posts=posts, username=username,
+                self.render('user_posts.html', posts=posts, username=username,
                             btn_name=btn)
             else:
                 self.redirect('/myposts')
@@ -657,6 +657,21 @@ class SettingsPage(BlogHandler):
         time.sleep(0.1)
         self.redirect('/settings')
 
+
+class UserFollowersPage(BlogHandler):
+
+    def get(self, username):
+        if self.user and User.all().filter('username =', username).get():
+            f = Followers.get_followers(username)
+            u = User.all().filter('username =',username).get()
+            # self.write(p[0])
+            if Followers.if_following(self.user.username, username):
+                btn = "unfollow"
+            else:
+                btn = "follow"
+
+            self.render('user_followers.html', names=f, username=u,btn_name=btn)
+
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/signup', Register),
@@ -670,5 +685,6 @@ app = webapp2.WSGIApplication([
     ('/liked', LikedPosts),
     ('/userpage/(.*)', UserPage),
     ('/news', NewsPage),
-    ('/settings', SettingsPage)
+    ('/settings', SettingsPage),
+    ('/followers/(.*)', UserFollowersPage),
 ], debug=True)
