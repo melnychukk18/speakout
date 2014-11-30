@@ -1,0 +1,24 @@
+{% extends "base_mypage.html" %}
+{% block content %}
+<form method="post">
+  <input type="hidden" name="username" value="{{username}}">
+  <input type="hidden" name="action" value="{{action}}">
+  <button type="submit">
+    {{btn_name}}  
+  </button>
+  </form>
+      <div class="posts">
+  {% if posts %}
+  {% for p in posts %}
+    {{p.render(preview = True,user=user) | safe}}
+  {% endfor %}
+  {% else %}
+  <p style="font-size: 20px; padding: 20px 20px;">There is no posts :(</p>
+  {% endif %}
+      </div>
+
+
+<script>
+	classToggle('{{forJS}}');
+</script>
+{% endblock %}

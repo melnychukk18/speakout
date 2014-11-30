@@ -1,11 +1,17 @@
-{% extends "base.html" %}
+{% extends "base_mypage.html" %}
 {% block content %}
-    {% for post in posts %}
-    <hr>
-    <div class="post">
-        <div class="post-subject">{{post.subject}}</div>
-        <div class="post-content">{{post.content}}</div><br>
-        {{post.key().id()}}
-    </div>
-    {% endfor %}
+      <div class="posts">
+  {% if posts %}
+  {% for p in posts %}
+    {{p.render(preview = True,user=user) | safe}}
+  {% endfor %}
+  {% else %}
+  <p style="font-size: 20px; padding: 20px 20px;">There is no posts :(</p>
+  {% endif %}
+      </div>
+
+
+<script>
+	classToggle('{{forJS}}');
+</script>
 {% endblock %}

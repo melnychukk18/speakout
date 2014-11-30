@@ -9,3 +9,38 @@ indexes:
 # manually, move them above the marker line.  The index.yaml file is
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
+
+- kind: Comments
+  properties:
+  - name: post_id
+  - name: created
+
+- kind: Comments
+  properties:
+  - name: post_id
+  - name: created
+    direction: desc
+
+- kind: Likes
+  properties:
+  - name: user_id
+  - name: time_liked
+    direction: desc
+
+- kind: Likes
+  properties:
+  - name: username
+  - name: time_liked
+    direction: desc
+
+- kind: Post
+  properties:
+  - name: user_id
+  - name: created
+    direction: desc
+
+- kind: Post2
+  properties:
+  - name: user_id
+  - name: created
+    direction: desc

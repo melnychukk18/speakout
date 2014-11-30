@@ -1,0 +1,41 @@
+<div class="post">
+  <div class="post-heading">
+    <div class="post-title">
+        <a href="/post/{{p.key().id()}}">{{p.subject}}</a>
+    </div>
+  </div>
+
+  <div class="post-content">
+    {{p._render_text | safe }}
+  </div>
+  <div class="post-footer">
+    <div class="post-date post-footer-element">
+      <img src="/img/calendar.png">
+      {{p.created.strftime("%b %d, %Y")}}
+    </div>
+    <div class="post-user post-footer-element">
+      <img src="/img/user2.png">{{p.user}}
+    </div>
+
+    <div class="post-comments post-footer-element">
+      <img src="/img/comment.png">{{p.comments}}
+    </div>
+    <form method="post" class="post-footer-element">
+    <div class="post-likes post-footer-element">
+      <input type="hidden" name="like" value="{{p.key().id()}}">
+      <button type="submit">{% if p.if_liked(user.username) %}
+        <img src="/img/like2.png">{% else %}
+        <img src="/img/like.png">{% endif %}
+      </button>{{p.likes}}
+
+    </div>
+    </form>
+    <div class="post-views post-footer-element">
+      <img src="/img/eye.png">{{p.views}}
+    </div>
+
+    <div class="post-postpage post-footer-element">
+      <a href="/post/{{p.key().id()}}">post page</a>
+    </div>
+  </div>
+</div>

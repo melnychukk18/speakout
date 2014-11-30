@@ -1,0 +1,25 @@
+{% extends "base_mypage.html" %}
+
+{% block content %}
+<div class="newpost">
+
+    <form method="post">
+      <label>
+        <div>Subject</div>
+        <input type="text" name="subject"class="form-control" value="{{subject}}" placeholder="Type your subject">
+      </label>
+
+      <label>
+        <div>Text</div>
+        <textarea name="content"class="form-control" rows='15' placeholder="Type your text">{{content}}</textarea>
+      </label>
+
+      <div class="error">{{error}}</div>
+
+      <input type="submit" value="Add post">
+    </form>
+</div>
+      <script>
+  classToggle('{{forJS}}');
+</script>
+{% endblock %}

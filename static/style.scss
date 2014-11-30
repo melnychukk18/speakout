@@ -1,0 +1,405 @@
+/*
+    Custom variables
+*/
+$main-font: "Open Sans", sans-serif;
+$sub-font: "Lato", sans-serif;
+$fancy-font: "Pacifico", cursive;
+$font-size: 16px;
+
+$black: #000;
+$white: #FFF;
+$grey: #585c65;
+$mediumgrey: #9b9b9b;
+$lightgrey: #eee;
+$blue: #3466a1;
+
+$padding: 10px;
+$margin: 10px;
+
+/*
+    Cancel bootstrap variables
+*/
+$font-family-sans-serif: $main-font;
+
+@import "bootstrap";
+
+* {
+    position: relative;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    color: $grey;
+    font-size: $font-size;
+    height: 100%;
+}
+
+#main {
+    height: 100%;
+    background: url("img/bg.jpg");
+    position: relative;
+    min-height: 500px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    footer {
+        color: white;
+        position: absolute;
+        text-align: center;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        font-size: 13px;
+        font-family: $sub-font;
+        a {
+            color: $white;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: $white;
+        }
+    }
+}
+
+#logo {
+    font-family: $fancy-font;
+    font-size: 20px;
+    color: $white;
+    margin: 30px 0;
+}
+
+.main_content {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    top: 30%;
+    h1 {
+        padding: 0;
+        margin: 0;
+        color: white;
+        font-weight: 300;
+        font-family: $sub-font;
+        font-size: 40px;
+        @media screen and (max-width: $screen-xs) {
+            font-size: 30px;
+        }
+    }
+    a {
+        display: inline-block;
+        padding: 10px 15px;
+        background: $grey;
+        margin: 20px 5px;
+        color: $white;
+        text-decoration: none;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+    a:hover {
+        text-decoration: none;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* LOGIN */
+.not-login-form {
+    position: relative;
+    top: 15%;
+    @media screen and (max-width: $screen-xs) {
+        top: 20px;
+    }
+}
+
+.for-form {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    @media screen and (max-width: $screen-xs) {
+        padding: 10px;
+    }
+    input {
+        font-family: $sub-font;
+    }
+    button {
+        font-family: $sub-font;
+        background-color: rgba(255, 255, 255, 0.6);
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    input {
+        background-repeat: no-repeat;
+        background-size: 16px;
+        background-position: 9px 9px;
+        padding-left: 35px;
+        margin: 5px 0;
+    }
+    a {
+        display: inline-block;
+        color: $white;
+        margin-right: 10px;
+        text-decoration: underline;
+    }
+    .password-input {
+        background-image: url("img/key.png");
+    }
+    .username-input {
+        background-image: url("img/user.png");
+    }
+    .email-input {
+        background-image: url("img/mail.png");
+    }
+    h1 {
+        color: white;
+        font-family: $sub-font;
+        padding: 0;
+        margin: 0 0 20px 0;
+        font-size: 32px;
+        @media screen and (max-width: $screen-xs) {
+            font-size: 25px;
+        }
+    }
+    span {
+        color: #c63c3c;
+        font-size: 13px;
+        margin: 0;
+    }
+}
+
+/* USER STYLES */
+
+#user-main {
+    min-height: 100%;
+    background: $white;
+    position: relative;
+    padding-bottom: 50px;
+    footer {
+        color: $grey;
+        position: absolute;
+        text-align: center;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        font-size: 13px;
+        font-family: $sub-font;
+        a {
+            color: $grey;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: $grey;
+        }
+    }
+    .frontpage-nav {
+        ul {
+            padding: 0;
+            margin: 0;
+            border-bottom: 1px solid $grey;
+        }
+        li {
+            list-style: none;
+            display: inline-block;
+            padding: 1px 15px;
+        }
+        li:hover {
+            background: #e8e8e8;
+        }
+        a {
+            color: $grey;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+        .active {
+            background-color: $grey;
+            a {
+                color: $white;
+            }
+        }
+        .active:hover {
+            background: $grey;
+        }
+        #newpost {
+            float: right;
+            img {
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+#user-logo {
+    font-family: $fancy-font;
+    font-size: 20px;
+    color: $grey;
+    float: left;
+    margin: 30px 0;
+}
+
+#header-nav {
+    font-family: $sub-font;
+    color: $grey;
+    float: right;
+    margin-top: 21px;
+    li {
+        list-style: none;
+        display: inline-block;
+        padding: 0 10px;
+    }
+    a {
+        color: $grey;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+}
+
+.post {
+    .post-title {
+        margin: 20px 0 10px 0;
+        a {
+            font-size: 25px;
+            color: $grey;
+        }
+    }
+    .post-footer {
+        margin: 10px 0 10px 0;
+        img {
+            width: 15px;
+            margin-right: 5px;
+        }
+        .post-footer-element {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 13px;
+            font-weight: 700;
+            button {
+                border: none;
+                background: none;
+            }
+        }
+        .post-postpage {
+            a {
+                color: white;
+                padding: 1px 10px;
+                background-color: #959595;
+            }
+            a:hover {
+                text-decoration: none;
+                background-color: $grey;
+            }
+        }
+    }
+}
+
+#add-comment-btn {
+    border: none;
+    background-color: #959595;
+    color: $white;
+    border-radius: 3px;
+    margin-top: 10px;
+    padding: 3px 10px;
+}
+
+.comment {
+    margin: 20px 0;
+    .comment-title {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+    .comment-date {
+        font-size: 13px;
+    }
+    img {
+        width: 15px;
+        margin-right: 10px;
+    }
+}
+
+.newpost {
+    label {
+        width: 100%;
+        div {
+            margin: 10px 0 5px 0;
+        }
+    }
+    input, textarea {
+        font-weight: normal;
+    }
+    input[type='submit'] {
+        border: none;
+        background: #959595;
+        color: $white;
+        border-radius: 3px;
+        padding: 3px 10px;
+    }
+}
+
+
+
+.user-sidebar{
+    padding: 0 2%;
+    .user-title{
+        font-weight: 700;
+        margin: 0 0 20px 0;
+        img{
+            width: 15px;
+            margin-right: 15px;
+        }
+        .user-status{
+            font-weight: 100;
+            font-size: 14px;
+            border-left: 4px solid #e8e8e8;
+            padding-left: 10px;
+            margin-top: 15px;
+        }
+    }
+    .user-blocks{
+        width: 100%;
+        height: 50px;
+
+        .user-block{
+            width:21%;
+            height: 50px;
+            background: #e8e8e8;
+            float: left;
+            margin: 2%;
+            text-align: center;
+            line-height: 13px;
+            padding-top: 12px;
+            cursor: pointer;
+            .user-block-number{
+                font-size: 24px;
+                color: white;
+            }
+            .user-block-name{
+                font-size: 12px;
+                color: white;
+            }
+            &:hover{
+                background-color: $grey;
+            }
+        }
+    }
+
+    .user-about{
+        .user-about-title{
+            font-size: 14px;
+            font-weight: 700;
+            margin: 20px 5px;
+        }
+        .user-about-text{
+            font-size: 13px;
+            border-left: 4px solid #e8e8e8;
+            padding-left: 10px;
+        }
+    }
+}

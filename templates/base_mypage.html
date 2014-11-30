@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block base_content %}
+  <div id="user-main">
+    <header><div class="container">
+      <h1 id="user-logo">speakout <span style="font-size:10px">beta</span></h1>
+      <nav id="header-nav">
+        <ul>
+          <li><a href="/logout">home</a></li>
+          <li><a href="/logout">settings</a></li>
+          <li><a href="/logout">logout</a></li>
+          
+        </ul>
+      </nav>
+    </div></header>
+    <div class="container">
+      
+      <div class="row">
+        <div class="col-md-8">
+          
+          <nav class="frontpage-nav">
+            <ul>
+              <li id="my-posts" class="active fp-nav-element"><a href="/myposts">My posts</a></li>
+              <li id="top-posts" class="fp-nav-element"><a href="/top">Top</a>
+            </li>
+            <li id="noize" class="fp-nav-element"><a href="/noize">Noize</a>              </li>
+            <li id="liked" class="fp-nav-element"><a href="/liked">Liked</a></li>
+            <li id="newpost" class="fp-nav-element"><a href="/newpost"><img src="/img/pen.png" width="15px" alt="">New post</a></li>
+          </ul>
+        </nav>
+        
+        {% block content %}
+        {% endblock %}
+      </div>
+      <div class="col-md-4 user-sidebar">
+        <div class="user-title"><img src="/img/user2.png" alt="">{{user.username}}
+        <div class="user-status">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores, pariatur.</div></div>
+        <div class="user-blocks">
+
+          <div class="user-block">
+            <span class="user-block-number">23</span><br>
+            <span class="user-block-name">followers</span>
+          </div><div class="user-block">
+            <span class="user-block-number">31</span><br>
+            <span class="user-block-name">following</span>
+          </div><div class="user-block">
+            <span class="user-block-number">12</span><br>
+            <span class="user-block-name">posts</span>
+          </div><div class="user-block">
+            <span class="user-block-number">24</span><br>
+            <span class="user-block-name">liked</span>
+          </div>
+        </div>
+
+        
+        <div class="user-about">
+          <div class="user-about-title">Abuot me:</div>
+          <div class="user-about-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore eius possimus accusamus suscipit veritatis facere ab placeat voluptatibus aliquam inventore.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>Created by <a href="">Taras Melnychuk</a> in 2014</p>
+  </footer>
+</div>
+{% endblock %}

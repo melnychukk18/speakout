@@ -1,7 +1,25 @@
 {% extends "base.html" %}
+
 {% block content %}
-    <div class="post">
-        <div class="post-subject">{{mypost.subject}}</div>
-        <div class="post-content">{{mypost.content}}</div><br>
-    </div>
+			<div class="posts">
+				{{post.render(user) | safe}}
+			</div>
+			<hr>
+			<h3>Add comment</h3>
+			<form method="post">
+				<textarea name="comment" id="comment_text" rows="3" class="form-control" placeholder="Your comment"></textarea>
+				<input type="submit" id="add-comment-btn" value="Add comment">
+			</form>
+			<hr>
+			{% for i in comments %}
+			<div class="comment">
+				<div class="comment-title"><img src="/img/user3.png" alt="">{{i.username}}</div>
+				<p class="comment-content">{{i.content}}</p>
+				<p class="comment-date"><img src="/img/calendar.png" alt="">{{i.created.strftime("%b %d, %Y")}}</p>
+				</div>
+				<hr>
+			{% endfor %}
+			<script>
+	classOff();
+</script>
 {% endblock %}

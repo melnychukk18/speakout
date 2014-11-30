@@ -1,0 +1,54 @@
+.navbar-brand{
+    font-family: 'Pacifico', cursive;
+}
+body{
+    background: url('/../img/bg.jpg');
+    background-size: 100%;
+    
+}
+#main-header{
+    color: white;
+    text-align: center;
+    font-weight: lighter;
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+    text-transform: uppercase;
+    font-family: 'Open Sans';
+    margin-top: 200px;
+}
+#main-header h1, #main-header h3{
+    font-weight: 300;
+    -webkit-text-shadow: 0 0 7px #000;
+    text-shadow: 0 0 7px #000;
+}
+#main-header a{
+    font-weight: 400;
+    text-decoration: underline;
+    color: white;
+}
+#register-form{
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+}
+#reg-form{
+    text-align: left;
+}
+#reg-form input{
+    margin: 5px 0;
+}
+#reg-form button{
+    width: 100%;
+    margin-top: 10px;
+}
+#reg-form h1{
+    padding: 0;
+    margin: 0 0 20px 0;
+    font-family: 'Open Sans';
+    font-weight: 300;
+}
+#reg-form .error{
+    color: #E85F5F;
+}
