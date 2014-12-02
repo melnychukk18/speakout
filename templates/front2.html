@@ -27,19 +27,19 @@
         </div></div>
         <div class="user-blocks">
         
-          <div class="user-block">
+          <a href="/followers/{{username.username}}" class="user-block">
             <span class="user-block-number">{{username.get_followers_number(username.username)}}</span><br>
             <span class="user-block-name">followers</span>
-          </div><div class="user-block">
+          </a><a href="/followings/{{username.username}}" class="user-block">
             <span class="user-block-number">{{username.get_followings_number(username.username)}}</span><br>
             <span class="user-block-name">following</span>
-          </div><div class="user-block">
+          </a><a href="/userpage/{{username.username}}" class="user-block">
             <span class="user-block-number">{{username.get_posts_number(username.username)}}</span><br>
             <span class="user-block-name">posts</span>
-          </div><div class="user-block">
+          </a><a href="/liked/{{username.username}}" class="user-block">
             <span class="user-block-number">{{username.get_liked_number(username.username)}}</span><br>
             <span class="user-block-name">liked</span>
-          </div>
+          </a>
         </div>
 
         

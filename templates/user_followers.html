@@ -1,6 +1,20 @@
 {% extends 'front2.html' %}
 {% block content %}
+<h2 class="userpage-main-header">{{username.username}}'s {{text}}</h2>
+<div class="clearfix"></div>
 {% for k in names %}
 	<h1>{{k.username}}</h1>
+	<p>{{k.status}}</p>
+	<p>{{k.get_followers_number(k.username)}}</p>
+	<p>{{k.if_following(user.username,k.username)}}</p>
+        
+    <form method="post">
+      <input type="hidden" name="username" value="{{username.username}}">
+      <input type="hidden" name="action" value="{{action}}">
+      <button type="submit">
+        {{btn_name}}  
+      </button>
+    </form>
+    
 {% endfor %}
 {% endblock %}

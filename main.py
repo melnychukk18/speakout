@@ -173,6 +173,15 @@ class User(db.Model):
             return None
 
     @classmethod
+    def if_following(cls, username, following_name):
+        if Followers.all().filter('username =',
+                                  username).filter('following_name =',
+                                                   following_name).get():
+            return True
+        else:
+            return False
+
+    @classmethod
     def login(cls, name, pw):
         u = cls.by_name(name)
         if u and valid_pw(name, pw, u.pw_hash):
@@ -564,6 +573,10 @@ class PostPage(BlogHandler):
                 c = Comments(parent=blog_key(), username=uname,
                              post_id=p_id, content=content)
                 c.put()
+                my_post = Post.get_by_id(int(post_id))
+                my_post.comments = my_post.comments + 1
+                my_post.put()
+
             self.redirect('/post/%s' % post_id)
 
 
@@ -663,14 +676,45 @@ class UserFollowersPage(BlogHandler):
     def get(self, username):
         if self.user and User.all().filter('username =', username).get():
             f = Followers.get_followers(username)
-            u = User.all().filter('username =',username).get()
+            u = User.all().filter('username =', username).get()
             # self.write(p[0])
             if Followers.if_following(self.user.username, username):
                 btn = "unfollow"
             else:
                 btn = "follow"
 
-            self.render('user_followers.html', names=f, username=u,btn_name=btn)
+            self.render(
+                'user_followers.html', names=f, username=u, btn_name=btn, text="followers")
+
+
+class UserFollowingsPage(BlogHandler):
+
+    def get(self, username):
+        if self.user and User.all().filter('username =', username).get():
+            f = Followers.get_followings(username)
+            u = User.all().filter('username =', username).get()
+            # self.write(p[0])
+            if Followers.if_following(self.user.username, username):
+                btn = "unfollow"
+            else:
+                btn = "follow"
+
+            self.render(
+                'user_followers.html', names=f, username=u, btn_name=btn, text="followings")
+
+
+class UserLikedPosts(BlogHandler):
+
+    def get(self, username):
+        if self.user and User.all().filter('username =', username).get():
+            likes = Likes.all().filter('username =', username)
+            posts = [Post.get_by_id(long(i.post_id)) for i in likes]
+            if Followers.if_following(self.user.username, username):
+                btn = "unfollow"
+            else:
+                btn = "follow"
+            u = User.by_name(username)
+            self.render('user_liked.html', username = u, btn_name=btn, posts=posts)
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
@@ -687,4 +731,6 @@ app = webapp2.WSGIApplication([
     ('/news', NewsPage),
     ('/settings', SettingsPage),
     ('/followers/(.*)', UserFollowersPage),
+    ('/followings/(.*)', UserFollowingsPage),
+    ('/liked/(.*)', UserLikedPosts),
 ], debug=True)

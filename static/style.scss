@@ -401,6 +401,7 @@ body {
         height: 50px;
 
         .user-block{
+            display: block;
             width:21%;
             height: 50px;
             background: #e8e8e8;
@@ -410,6 +411,8 @@ body {
             line-height: 13px;
             padding-top: 12px;
             cursor: pointer;
+            text-decoration: none;
+            text-decoration: normal;
             .user-block-number{
                 font-size: 24px;
                 color: white;
@@ -437,4 +440,17 @@ body {
             }
         }
     }
+}
+
+.userpage-main-header{
+    margin-top: 0;
+    font-size: 20px;
+    color: $white;
+    background: $grey;
+    padding: 5px 10px;
+    font-weight: 300;
+    float: left;
+}
+.clearfix{
+    clear: both;
 }

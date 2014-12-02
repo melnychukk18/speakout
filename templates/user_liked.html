@@ -1,0 +1,9 @@
+{% extends 'front2.html' %}
+{% block content %}
+<h2 class="userpage-main-header">{{username.username}}'s liked posts</h2>
+<div class="clearfix"></div>
+
+  {% for p in posts %}
+    {{p.render(preview = True,user=user) | safe}}
+  {% endfor %}
+{% endblock %}
